@@ -6,7 +6,14 @@ using System.Threading.Tasks;
 
 namespace RobotControlLibrary
 {
-    internal class UserAccountModel
+    
+
+    public class UserAccountModel
     {
+        public int UserId { get; set; }
+        public string Username { get; set; }
+        public byte[] PasswordHash { get; set; }
+        public string Role { get; set; }
+        public DateTime CreatedAt { get; set; }
     }
 }

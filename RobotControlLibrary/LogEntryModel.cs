@@ -6,7 +6,15 @@ using System.Threading.Tasks;
 
 namespace RobotControlLibrary
 {
-    internal class LogEntryModel
+   
+
+    public class LogEntryModel
     {
+        public long LogId { get; set; }
+        public string DeviceId { get; set; }
+        public string Level { get; set; }
+        public string Message { get; set; }
+        public string ContextJson { get; set; }
+        public DateTime CreatedAt { get; set; }
     }
 }

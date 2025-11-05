@@ -6,7 +6,12 @@ using System.Threading.Tasks;
 
 namespace RobotControlLibrary
 {
-    internal class DeviceModel
+    public class DeviceModel
     {
+        public string DeviceId { get; set; }
+        public string DisplayName { get; set; }
+        public string Status { get; set; }
+        public DateTime? LastHeartbeat { get; set; }
     }
+
 }

@@ -6,7 +6,14 @@ using System.Threading.Tasks;
 
 namespace RobotControlLibrary
 {
-    internal class RoutineModel
+    
+    public class RoutineModel
     {
+        public int RoutineId { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public int CreatedBy { get; set; }
+        public DateTime CreatedAt { get; set; }
+        public List<RoutineStep> Steps { get; set; } = new();
     }
 }

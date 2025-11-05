@@ -6,7 +6,13 @@ using System.Threading.Tasks;
 
 namespace RobotControlLibrary
 {
-    internal class CommandEventModel
+    public class CommandEventModel
     {
+        public long CommandEventId { get; set; }
+        public int CommandId { get; set; }
+        public string FromStatus { get; set; }
+        public string ToStatus { get; set; }
+        public string Message { get; set; }
+        public DateTime CreatedAt { get; set; }
     }
 }

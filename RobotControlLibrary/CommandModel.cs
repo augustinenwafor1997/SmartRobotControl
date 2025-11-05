@@ -6,7 +6,19 @@ using System.Threading.Tasks;
 
 namespace RobotControlLibrary
 {
-    internal class CommandModel
+    public class CommandModel
     {
+        public int CommandId { get; set; }
+        public string DeviceId { get; set; }
+        public string CommandType { get; set; }
+        public string PayloadJson { get; set; }
+        public string Status { get; set; }
+        public Guid? GroupId { get; set; }
+        public int RequestedBy { get; set; }
+        public DateTime RequestedAt { get; set; }
+        public DateTime? StartedAt { get; set; }
+        public DateTime? CompletedAt { get; set; }
+        public string ResultMessage { get; set; }
     }
+
 }
