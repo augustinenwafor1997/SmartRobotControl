@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RobotControlLibrary
+namespace RobotControlLibrary.Models
 {
     
     public class RoutineModel
@@ -14,6 +14,6 @@ namespace RobotControlLibrary
         public string Description { get; set; }
         public int CreatedBy { get; set; }
         public DateTime CreatedAt { get; set; }
-        public List<RoutineStep> Steps { get; set; } = new();
+        public List<RoutineStepModel> Steps { get; set; } = new();
     }
 }

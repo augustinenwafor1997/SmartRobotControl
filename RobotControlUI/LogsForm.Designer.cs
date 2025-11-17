@@ -28,24 +28,26 @@
         /// </summary>
         private void InitializeComponent()
         {
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
             lblPageTitle = new Label();
             gbFilters = new GroupBox();
+            btnExportCSV = new Button();
+            dgvLogs = new DataGridView();
+            colLogId = new DataGridViewTextBoxColumn();
+            colLevel = new DataGridViewTextBoxColumn();
+            colDevice = new DataGridViewTextBoxColumn();
+            colMessage = new DataGridViewTextBoxColumn();
+            colCreatedAt = new DataGridViewTextBoxColumn();
+            dtpDateTo = new DateTimePicker();
+            lblFilterDateTo = new Label();
+            dtpDateFrom = new DateTimePicker();
+            lblFilterDateFrom = new Label();
+            cbFilterDevice = new ComboBox();
             cbFilterLevel = new ComboBox();
             lblFilterLevel = new Label();
             btnApplyFilter = new Button();
             lblFilterDevice = new Label();
-            cbFilterDevice = new ComboBox();
-            lblFilterDateFrom = new Label();
-            dtpDateFrom = new DateTimePicker();
-            dtpDateTo = new DateTimePicker();
-            lblFilterDateTo = new Label();
-            dgvLogs = new DataGridView();
-            LogId = new DataGridViewTextBoxColumn();
-            Level = new DataGridViewTextBoxColumn();
-            Device = new DataGridViewTextBoxColumn();
-            Message = new DataGridViewTextBoxColumn();
-            CreatedAt = new DataGridViewTextBoxColumn();
-            btnExportCSV = new Button();
+            lblStatus = new Label();
             gbFilters.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvLogs).BeginInit();
             SuspendLayout();
@@ -57,13 +59,14 @@
             lblPageTitle.ForeColor = Color.FromArgb(102, 77, 171);
             lblPageTitle.Location = new Point(30, 30);
             lblPageTitle.Name = "lblPageTitle";
-            lblPageTitle.Size = new Size(300, 62);
+            lblPageTitle.Size = new Size(237, 50);
             lblPageTitle.TabIndex = 2;
             lblPageTitle.Text = "System Logs";
             // 
             // gbFilters
             // 
             gbFilters.BackColor = Color.White;
+            gbFilters.Controls.Add(lblStatus);
             gbFilters.Controls.Add(btnExportCSV);
             gbFilters.Controls.Add(dgvLogs);
             gbFilters.Controls.Add(dtpDateTo);
@@ -79,95 +82,102 @@
             gbFilters.ForeColor = Color.FromArgb(73, 46, 135);
             gbFilters.Location = new Point(30, 160);
             gbFilters.Name = "gbFilters";
-            gbFilters.Size = new Size(638, 371);
+            gbFilters.Size = new Size(1140, 513);
             gbFilters.TabIndex = 4;
             gbFilters.TabStop = false;
             gbFilters.Text = "Filters";
             // 
-            // cbFilterLevel
+            // btnExportCSV
             // 
-            cbFilterLevel.DropDownStyle = ComboBoxStyle.DropDownList;
-            cbFilterLevel.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            cbFilterLevel.FormattingEnabled = true;
-            cbFilterLevel.Items.AddRange(new object[] { "All Levels", "Info", "Warn", "Error" });
-            cbFilterLevel.Location = new Point(103, 93);
-            cbFilterLevel.Name = "cbFilterLevel";
-            cbFilterLevel.Size = new Size(206, 33);
-            cbFilterLevel.TabIndex = 14;
+            btnExportCSV.BackColor = Color.FromArgb(253, 185, 19);
+            btnExportCSV.FlatStyle = FlatStyle.Flat;
+            btnExportCSV.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnExportCSV.ForeColor = Color.FromArgb(73, 46, 135);
+            btnExportCSV.Location = new Point(597, 449);
+            btnExportCSV.Name = "btnExportCSV";
+            btnExportCSV.Size = new Size(203, 38);
+            btnExportCSV.TabIndex = 31;
+            btnExportCSV.Text = "📥 Export to CSV";
+            btnExportCSV.UseVisualStyleBackColor = false;
+            btnExportCSV.Click += btnExportCSV_Click;
             // 
-            // lblFilterLevel
+            // dgvLogs
             // 
-            lblFilterLevel.AutoSize = true;
-            lblFilterLevel.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblFilterLevel.ForeColor = Color.FromArgb(102, 77, 171);
-            lblFilterLevel.Location = new Point(13, 98);
-            lblFilterLevel.Name = "lblFilterLevel";
-            lblFilterLevel.Size = new Size(56, 23);
-            lblFilterLevel.TabIndex = 12;
-            lblFilterLevel.Text = "Level:";
-            lblFilterLevel.TextAlign = ContentAlignment.MiddleCenter;
+            dgvLogs.AllowUserToAddRows = false;
+            dgvLogs.AllowUserToDeleteRows = false;
+            dgvLogs.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvLogs.BackgroundColor = Color.White;
+            dgvLogs.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvLogs.Columns.AddRange(new DataGridViewColumn[] { colLogId, colLevel, colDevice, colMessage, colCreatedAt });
+            dgvLogs.Location = new Point(330, 47);
+            dgvLogs.Name = "dgvLogs";
+            dgvLogs.ReadOnly = true;
+            dgvLogs.RowHeadersWidth = 51;
+            dgvLogs.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvLogs.Size = new Size(787, 372);
+            dgvLogs.TabIndex = 30;
+            dgvLogs.CellDoubleClick += dgvLogs_CellDoubleClick;
             // 
-            // btnApplyFilter
+            // colLogId
             // 
-            btnApplyFilter.BackColor = Color.FromArgb(102, 77, 171);
-            btnApplyFilter.FlatStyle = FlatStyle.Flat;
-            btnApplyFilter.ForeColor = Color.White;
-            btnApplyFilter.Location = new Point(81, 232);
-            btnApplyFilter.Name = "btnApplyFilter";
-            btnApplyFilter.Size = new Size(128, 38);
-            btnApplyFilter.TabIndex = 10;
-            btnApplyFilter.Text = "🔍 Apply";
-            btnApplyFilter.UseVisualStyleBackColor = false;
+            colLogId.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            colLogId.DataPropertyName = "LogId";
+            colLogId.FillWeight = 5.6188693F;
+            colLogId.HeaderText = "Log ID";
+            colLogId.MinimumWidth = 80;
+            colLogId.Name = "colLogId";
+            colLogId.ReadOnly = true;
+            colLogId.Width = 80;
             // 
-            // lblFilterDevice
+            // colLevel
             // 
-            lblFilterDevice.AutoSize = true;
-            lblFilterDevice.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblFilterDevice.ForeColor = Color.FromArgb(102, 77, 171);
-            lblFilterDevice.Location = new Point(13, 52);
-            lblFilterDevice.Name = "lblFilterDevice";
-            lblFilterDevice.Size = new Size(68, 23);
-            lblFilterDevice.TabIndex = 3;
-            lblFilterDevice.Text = "Device:";
-            lblFilterDevice.TextAlign = ContentAlignment.MiddleCenter;
+            colLevel.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            colLevel.DataPropertyName = "Level";
+            colLevel.FillWeight = 418.3225F;
+            colLevel.HeaderText = "Level";
+            colLevel.MinimumWidth = 80;
+            colLevel.Name = "colLevel";
+            colLevel.ReadOnly = true;
             // 
-            // cbFilterDevice
+            // colDevice
             // 
-            cbFilterDevice.DropDownStyle = ComboBoxStyle.DropDownList;
-            cbFilterDevice.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            cbFilterDevice.FormattingEnabled = true;
-            cbFilterDevice.Items.AddRange(new object[] { "Pick", "Place", "MoveForward", "Reverse", "TurnLeft", "TurnRight", "AboutTurn", "Home", "Stop" });
-            cbFilterDevice.Location = new Point(103, 47);
-            cbFilterDevice.Name = "cbFilterDevice";
-            cbFilterDevice.Size = new Size(206, 33);
-            cbFilterDevice.TabIndex = 25;
+            colDevice.DataPropertyName = "DeviceId";
+            colDevice.FillWeight = 0.428940147F;
+            colDevice.HeaderText = "Device";
+            colDevice.MinimumWidth = 120;
+            colDevice.Name = "colDevice";
+            colDevice.ReadOnly = true;
             // 
-            // lblFilterDateFrom
+            // colMessage
             // 
-            lblFilterDateFrom.AutoSize = true;
-            lblFilterDateFrom.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblFilterDateFrom.ForeColor = Color.FromArgb(102, 77, 171);
-            lblFilterDateFrom.Location = new Point(14, 137);
-            lblFilterDateFrom.Name = "lblFilterDateFrom";
-            lblFilterDateFrom.Size = new Size(57, 23);
-            lblFilterDateFrom.TabIndex = 26;
-            lblFilterDateFrom.Text = "From:";
-            lblFilterDateFrom.TextAlign = ContentAlignment.MiddleCenter;
+            colMessage.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            colMessage.DataPropertyName = "Message";
+            colMessage.FillWeight = 67.49013F;
+            colMessage.HeaderText = "Message";
+            colMessage.MinimumWidth = 300;
+            colMessage.Name = "colMessage";
+            colMessage.ReadOnly = true;
             // 
-            // dtpDateFrom
+            // colCreatedAt
             // 
-            dtpDateFrom.Format = DateTimePickerFormat.Short;
-            dtpDateFrom.Location = new Point(102, 132);
-            dtpDateFrom.Name = "dtpDateFrom";
-            dtpDateFrom.Size = new Size(144, 31);
-            dtpDateFrom.TabIndex = 27;
+            colCreatedAt.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            colCreatedAt.DataPropertyName = "CreatedAt";
+            dataGridViewCellStyle3.Format = "G";
+            dataGridViewCellStyle3.NullValue = null;
+            colCreatedAt.DefaultCellStyle = dataGridViewCellStyle3;
+            colCreatedAt.FillWeight = 8.139586F;
+            colCreatedAt.HeaderText = "Timestamp";
+            colCreatedAt.MinimumWidth = 150;
+            colCreatedAt.Name = "colCreatedAt";
+            colCreatedAt.ReadOnly = true;
+            colCreatedAt.Width = 180;
             // 
             // dtpDateTo
             // 
             dtpDateTo.Format = DateTimePickerFormat.Short;
             dtpDateTo.Location = new Point(103, 169);
             dtpDateTo.Name = "dtpDateTo";
-            dtpDateTo.Size = new Size(144, 31);
+            dtpDateTo.Size = new Size(144, 27);
             dtpDateTo.TabIndex = 29;
             // 
             // lblFilterDateTo
@@ -177,83 +187,104 @@
             lblFilterDateTo.ForeColor = Color.FromArgb(102, 77, 171);
             lblFilterDateTo.Location = new Point(15, 174);
             lblFilterDateTo.Name = "lblFilterDateTo";
-            lblFilterDateTo.Size = new Size(33, 23);
+            lblFilterDateTo.Size = new Size(29, 19);
             lblFilterDateTo.TabIndex = 28;
             lblFilterDateTo.Text = "To:";
             lblFilterDateTo.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // dgvLogs
+            // dtpDateFrom
             // 
-            dgvLogs.AllowUserToAddRows = false;
-            dgvLogs.AllowUserToDeleteRows = false;
-            dgvLogs.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dgvLogs.BackgroundColor = Color.White;
-            dgvLogs.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvLogs.Columns.AddRange(new DataGridViewColumn[] { LogId, Level, Device, Message, CreatedAt });
-            dgvLogs.Location = new Point(330, 47);
-            dgvLogs.Name = "dgvLogs";
-            dgvLogs.ReadOnly = true;
-            dgvLogs.RowHeadersWidth = 51;
-            dgvLogs.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvLogs.Size = new Size(273, 233);
-            dgvLogs.TabIndex = 30;
+            dtpDateFrom.Format = DateTimePickerFormat.Short;
+            dtpDateFrom.Location = new Point(102, 132);
+            dtpDateFrom.Name = "dtpDateFrom";
+            dtpDateFrom.Size = new Size(144, 27);
+            dtpDateFrom.TabIndex = 27;
             // 
-            // LogId
+            // lblFilterDateFrom
             // 
-            LogId.FillWeight = 5.6188693F;
-            LogId.HeaderText = "LogId";
-            LogId.MinimumWidth = 6;
-            LogId.Name = "LogId";
-            LogId.ReadOnly = true;
+            lblFilterDateFrom.AutoSize = true;
+            lblFilterDateFrom.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblFilterDateFrom.ForeColor = Color.FromArgb(102, 77, 171);
+            lblFilterDateFrom.Location = new Point(14, 137);
+            lblFilterDateFrom.Name = "lblFilterDateFrom";
+            lblFilterDateFrom.Size = new Size(48, 19);
+            lblFilterDateFrom.TabIndex = 26;
+            lblFilterDateFrom.Text = "From:";
+            lblFilterDateFrom.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // Level
+            // cbFilterDevice
             // 
-            Level.FillWeight = 3.21952367F;
-            Level.HeaderText = "Level";
-            Level.MinimumWidth = 6;
-            Level.Name = "Level";
-            Level.ReadOnly = true;
+            cbFilterDevice.DropDownStyle = ComboBoxStyle.DropDownList;
+            cbFilterDevice.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            cbFilterDevice.FormattingEnabled = true;
+            cbFilterDevice.Items.AddRange(new object[] { "Pick", "Place", "MoveForward", "Reverse", "TurnLeft", "TurnRight", "AboutTurn", "Home", "Stop" });
+            cbFilterDevice.Location = new Point(103, 47);
+            cbFilterDevice.Name = "cbFilterDevice";
+            cbFilterDevice.Size = new Size(206, 27);
+            cbFilterDevice.TabIndex = 25;
             // 
-            // Device
+            // cbFilterLevel
             // 
-            Device.FillWeight = 2.76995373F;
-            Device.HeaderText = "Device";
-            Device.MinimumWidth = 6;
-            Device.Name = "Device";
-            Device.ReadOnly = true;
+            cbFilterLevel.DropDownStyle = ComboBoxStyle.DropDownList;
+            cbFilterLevel.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            cbFilterLevel.FormattingEnabled = true;
+            cbFilterLevel.Items.AddRange(new object[] { "All Levels", "Info", "Warn", "Error" });
+            cbFilterLevel.Location = new Point(103, 93);
+            cbFilterLevel.Name = "cbFilterLevel";
+            cbFilterLevel.Size = new Size(206, 27);
+            cbFilterLevel.TabIndex = 14;
             // 
-            // Message
+            // lblFilterLevel
             // 
-            Message.FillWeight = 435.828918F;
-            Message.HeaderText = "Message";
-            Message.MinimumWidth = 6;
-            Message.Name = "Message";
-            Message.ReadOnly = true;
+            lblFilterLevel.AutoSize = true;
+            lblFilterLevel.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblFilterLevel.ForeColor = Color.FromArgb(102, 77, 171);
+            lblFilterLevel.Location = new Point(13, 98);
+            lblFilterLevel.Name = "lblFilterLevel";
+            lblFilterLevel.Size = new Size(48, 19);
+            lblFilterLevel.TabIndex = 12;
+            lblFilterLevel.Text = "Level:";
+            lblFilterLevel.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // CreatedAt
+            // btnApplyFilter
             // 
-            CreatedAt.FillWeight = 52.56276F;
-            CreatedAt.HeaderText = "CreatedAt";
-            CreatedAt.MinimumWidth = 6;
-            CreatedAt.Name = "CreatedAt";
-            CreatedAt.ReadOnly = true;
+            btnApplyFilter.BackColor = Color.FromArgb(102, 77, 171);
+            btnApplyFilter.FlatStyle = FlatStyle.Flat;
+            btnApplyFilter.ForeColor = Color.White;
+            btnApplyFilter.Location = new Point(102, 231);
+            btnApplyFilter.Name = "btnApplyFilter";
+            btnApplyFilter.Size = new Size(128, 38);
+            btnApplyFilter.TabIndex = 10;
+            btnApplyFilter.Text = "🔍 Apply";
+            btnApplyFilter.UseVisualStyleBackColor = false;
+            btnApplyFilter.Click += btnApplyFilter_Click;
             // 
-            // btnExportCSV
+            // lblFilterDevice
             // 
-            btnExportCSV.BackColor = Color.FromArgb(253, 185, 19);
-            btnExportCSV.FlatStyle = FlatStyle.Flat;
-            btnExportCSV.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnExportCSV.ForeColor = Color.FromArgb(73, 46, 135);
-            btnExportCSV.Location = new Point(379, 310);
-            btnExportCSV.Name = "btnExportCSV";
-            btnExportCSV.Size = new Size(203, 38);
-            btnExportCSV.TabIndex = 31;
-            btnExportCSV.Text = "📥 Export to CSV";
-            btnExportCSV.UseVisualStyleBackColor = false;
+            lblFilterDevice.AutoSize = true;
+            lblFilterDevice.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblFilterDevice.ForeColor = Color.FromArgb(102, 77, 171);
+            lblFilterDevice.Location = new Point(13, 52);
+            lblFilterDevice.Name = "lblFilterDevice";
+            lblFilterDevice.Size = new Size(58, 19);
+            lblFilterDevice.TabIndex = 3;
+            lblFilterDevice.Text = "Device:";
+            lblFilterDevice.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // lblStatus
+            // 
+            lblStatus.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblStatus.ForeColor = Color.FromArgb(108, 117, 125);
+            lblStatus.Location = new Point(326, 422);
+            lblStatus.Name = "lblStatus";
+            lblStatus.Size = new Size(203, 19);
+            lblStatus.TabIndex = 5;
+            lblStatus.Text = "Showing 0 log entries";
+            lblStatus.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // LogsForm
             // 
-            AutoScaleDimensions = new SizeF(9F, 23F);
+            AutoScaleDimensions = new SizeF(8F, 19F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1196, 760);
             Controls.Add(gbFilters);
@@ -261,6 +292,7 @@
             Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
             Name = "LogsForm";
             Text = "Logs - Smart Automation Control System";
+            Load += LogsForm_Load;
             gbFilters.ResumeLayout(false);
             gbFilters.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgvLogs).EndInit();
@@ -289,11 +321,12 @@
         private DateTimePicker dtpDateFrom;
         private Label lblFilterDateFrom;
         private DataGridView dgvLogs;
-        private DataGridViewTextBoxColumn LogId;
-        private DataGridViewTextBoxColumn Level;
-        private DataGridViewTextBoxColumn Device;
-        private DataGridViewTextBoxColumn Message;
-        private DataGridViewTextBoxColumn CreatedAt;
         private Button btnExportCSV;
+        private DataGridViewTextBoxColumn colLogId;
+        private DataGridViewTextBoxColumn colLevel;
+        private DataGridViewTextBoxColumn colDevice;
+        private DataGridViewTextBoxColumn colMessage;
+        private DataGridViewTextBoxColumn colCreatedAt;
+        private Label lblStatus;
     }
 }

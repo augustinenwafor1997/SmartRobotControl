@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RobotControlLibrary
+namespace RobotControlLibrary.Models
 {
     public class DeviceModel
     {
@@ -12,6 +12,7 @@ namespace RobotControlLibrary
         public string DisplayName { get; set; }
         public string Status { get; set; }
         public DateTime? LastHeartbeat { get; set; }
+        public DateTime? CreatedAt { get; set; }
     }
 
 }

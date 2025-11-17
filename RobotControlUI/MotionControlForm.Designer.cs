@@ -30,17 +30,17 @@
         {
             motionControlHeaderLabel = new Label();
             gbCommandSetup = new GroupBox();
+            btnExecute = new Button();
+            nudSpeed = new NumericUpDown();
+            lblSpeed = new Label();
             nudDistance = new NumericUpDown();
             lblDistance = new Label();
             lblParametersHeader = new Label();
             cbCommandType = new ComboBox();
             lblCommandType = new Label();
-            lblSpeed = new Label();
-            nudSpeed = new NumericUpDown();
-            btnExecute = new Button();
             gbStatus = new GroupBox();
+            txtStatus = new TextBox();
             lblStatusHeader = new Label();
-            lblStatus = new Label();
             gbRecentCommands = new GroupBox();
             lbRecentCommands = new ListBox();
             lblDevice = new Label();
@@ -48,8 +48,8 @@
             btnEmergencyStop = new Button();
             btnQuickHome = new Button();
             gbCommandSetup.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)nudDistance).BeginInit();
             ((System.ComponentModel.ISupportInitialize)nudSpeed).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)nudDistance).BeginInit();
             gbStatus.SuspendLayout();
             gbRecentCommands.SuspendLayout();
             SuspendLayout();
@@ -61,7 +61,7 @@
             motionControlHeaderLabel.ForeColor = Color.FromArgb(102, 77, 171);
             motionControlHeaderLabel.Location = new Point(23, 19);
             motionControlHeaderLabel.Name = "motionControlHeaderLabel";
-            motionControlHeaderLabel.Size = new Size(274, 62);
+            motionControlHeaderLabel.Size = new Size(217, 50);
             motionControlHeaderLabel.TabIndex = 1;
             motionControlHeaderLabel.Text = "Commands";
             // 
@@ -84,13 +84,43 @@
             gbCommandSetup.TabStop = false;
             gbCommandSetup.Text = "Command Setup";
             // 
+            // btnExecute
+            // 
+            btnExecute.Location = new Point(137, 274);
+            btnExecute.Name = "btnExecute";
+            btnExecute.Size = new Size(128, 38);
+            btnExecute.TabIndex = 10;
+            btnExecute.Text = "▶️ Run";
+            btnExecute.UseVisualStyleBackColor = true;
+            btnExecute.Click += btnExecute_Click;
+            // 
+            // nudSpeed
+            // 
+            nudSpeed.Location = new Point(137, 210);
+            nudSpeed.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
+            nudSpeed.Name = "nudSpeed";
+            nudSpeed.Size = new Size(150, 29);
+            nudSpeed.TabIndex = 9;
+            nudSpeed.Value = new decimal(new int[] { 1, 0, 0, 0 });
+            // 
+            // lblSpeed
+            // 
+            lblSpeed.AutoSize = true;
+            lblSpeed.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblSpeed.Location = new Point(13, 217);
+            lblSpeed.Name = "lblSpeed";
+            lblSpeed.Size = new Size(72, 19);
+            lblSpeed.TabIndex = 8;
+            lblSpeed.Text = "Speed (%):";
+            lblSpeed.Click += label1_Click;
+            // 
             // nudDistance
             // 
             nudDistance.Enabled = false;
             nudDistance.Location = new Point(137, 165);
             nudDistance.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
             nudDistance.Name = "nudDistance";
-            nudDistance.Size = new Size(150, 34);
+            nudDistance.Size = new Size(150, 29);
             nudDistance.TabIndex = 7;
             nudDistance.Value = new decimal(new int[] { 1, 0, 0, 0 });
             // 
@@ -100,7 +130,7 @@
             lblDistance.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblDistance.Location = new Point(14, 172);
             lblDistance.Name = "lblDistance";
-            lblDistance.Size = new Size(117, 23);
+            lblDistance.Size = new Size(94, 19);
             lblDistance.TabIndex = 6;
             lblDistance.Text = "Distance (cm):";
             // 
@@ -111,7 +141,7 @@
             lblParametersHeader.ForeColor = Color.FromArgb(102, 77, 171);
             lblParametersHeader.Location = new Point(13, 128);
             lblParametersHeader.Name = "lblParametersHeader";
-            lblParametersHeader.Size = new Size(113, 25);
+            lblParametersHeader.Size = new Size(93, 20);
             lblParametersHeader.TabIndex = 5;
             lblParametersHeader.Text = "Parameters:";
             lblParametersHeader.TextAlign = ContentAlignment.MiddleCenter;
@@ -124,8 +154,9 @@
             cbCommandType.Items.AddRange(new object[] { "Pick", "Place", "MoveForward", "Reverse", "TurnLeft", "TurnRight", "AboutTurn", "Home", "Stop" });
             cbCommandType.Location = new Point(178, 49);
             cbCommandType.Name = "cbCommandType";
-            cbCommandType.Size = new Size(206, 33);
+            cbCommandType.Size = new Size(206, 27);
             cbCommandType.TabIndex = 4;
+            cbCommandType.SelectedIndexChanged += cbCommandType_SelectedIndexChanged;
             // 
             // lblCommandType
             // 
@@ -134,45 +165,15 @@
             lblCommandType.ForeColor = Color.FromArgb(102, 77, 171);
             lblCommandType.Location = new Point(13, 52);
             lblCommandType.Name = "lblCommandType";
-            lblCommandType.Size = new Size(159, 25);
+            lblCommandType.Size = new Size(130, 20);
             lblCommandType.TabIndex = 3;
             lblCommandType.Text = "Select Command:";
             lblCommandType.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // lblSpeed
-            // 
-            lblSpeed.AutoSize = true;
-            lblSpeed.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblSpeed.Location = new Point(13, 217);
-            lblSpeed.Name = "lblSpeed";
-            lblSpeed.Size = new Size(90, 23);
-            lblSpeed.TabIndex = 8;
-            lblSpeed.Text = "Speed (%):";
-            lblSpeed.Click += label1_Click;
-            // 
-            // nudSpeed
-            // 
-            nudSpeed.Enabled = false;
-            nudSpeed.Location = new Point(137, 210);
-            nudSpeed.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
-            nudSpeed.Name = "nudSpeed";
-            nudSpeed.Size = new Size(150, 34);
-            nudSpeed.TabIndex = 9;
-            nudSpeed.Value = new decimal(new int[] { 1, 0, 0, 0 });
-            // 
-            // btnExecute
-            // 
-            btnExecute.Location = new Point(137, 274);
-            btnExecute.Name = "btnExecute";
-            btnExecute.Size = new Size(128, 38);
-            btnExecute.TabIndex = 10;
-            btnExecute.Text = "▶️ Run";
-            btnExecute.UseVisualStyleBackColor = true;
-            // 
             // gbStatus
             // 
             gbStatus.BackColor = Color.Ivory;
-            gbStatus.Controls.Add(lblStatus);
+            gbStatus.Controls.Add(txtStatus);
             gbStatus.Controls.Add(lblStatusHeader);
             gbStatus.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             gbStatus.ForeColor = Color.FromArgb(73, 46, 135);
@@ -183,6 +184,20 @@
             gbStatus.TabStop = false;
             gbStatus.Text = "Status";
             // 
+            // txtStatus
+            // 
+            txtStatus.BackColor = Color.Ivory;
+            txtStatus.BorderStyle = BorderStyle.None;
+            txtStatus.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtStatus.Location = new Point(119, 47);
+            txtStatus.Multiline = true;
+            txtStatus.Name = "txtStatus";
+            txtStatus.ReadOnly = true;
+            txtStatus.ScrollBars = ScrollBars.Horizontal;
+            txtStatus.Size = new Size(124, 72);
+            txtStatus.TabIndex = 6;
+            txtStatus.TextChanged += txtStatus_TextChanged;
+            // 
             // lblStatusHeader
             // 
             lblStatusHeader.AutoSize = true;
@@ -190,22 +205,10 @@
             lblStatusHeader.ForeColor = Color.FromArgb(102, 77, 171);
             lblStatusHeader.Location = new Point(6, 47);
             lblStatusHeader.Name = "lblStatusHeader";
-            lblStatusHeader.Size = new Size(131, 23);
+            lblStatusHeader.Size = new Size(107, 19);
             lblStatusHeader.TabIndex = 4;
             lblStatusHeader.Text = "Current Status:";
             lblStatusHeader.TextAlign = ContentAlignment.MiddleCenter;
-            // 
-            // lblStatus
-            // 
-            lblStatus.AutoSize = true;
-            lblStatus.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblStatus.ForeColor = Color.FromArgb(40, 167, 69);
-            lblStatus.Location = new Point(138, 45);
-            lblStatus.Name = "lblStatus";
-            lblStatus.Size = new Size(60, 25);
-            lblStatus.TabIndex = 5;
-            lblStatus.Text = "Ready";
-            lblStatus.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // gbRecentCommands
             // 
@@ -224,6 +227,7 @@
             lbRecentCommands.BorderStyle = BorderStyle.FixedSingle;
             lbRecentCommands.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lbRecentCommands.FormattingEnabled = true;
+            lbRecentCommands.ItemHeight = 15;
             lbRecentCommands.Location = new Point(23, 39);
             lbRecentCommands.Name = "lbRecentCommands";
             lbRecentCommands.Size = new Size(239, 302);
@@ -236,7 +240,7 @@
             lblDevice.ForeColor = Color.FromArgb(102, 77, 171);
             lblDevice.Location = new Point(492, 196);
             lblDevice.Name = "lblDevice";
-            lblDevice.Size = new Size(133, 25);
+            lblDevice.Size = new Size(108, 20);
             lblDevice.TabIndex = 5;
             lblDevice.Text = "Target Device:";
             lblDevice.TextAlign = ContentAlignment.MiddleCenter;
@@ -247,7 +251,7 @@
             cbDevice.FormattingEnabled = true;
             cbDevice.Location = new Point(632, 193);
             cbDevice.Name = "cbDevice";
-            cbDevice.Size = new Size(162, 31);
+            cbDevice.Size = new Size(162, 27);
             cbDevice.TabIndex = 6;
             // 
             // btnEmergencyStop
@@ -260,6 +264,7 @@
             btnEmergencyStop.TabIndex = 11;
             btnEmergencyStop.Text = "⏹️ EMERGENCY STOP";
             btnEmergencyStop.UseVisualStyleBackColor = true;
+            btnEmergencyStop.Click += btnEmergencyStop_Click;
             // 
             // btnQuickHome
             // 
@@ -272,10 +277,11 @@
             btnQuickHome.TabIndex = 12;
             btnQuickHome.Text = "🏠 Quick Home";
             btnQuickHome.UseVisualStyleBackColor = false;
+            btnQuickHome.Click += btnQuickHome_Click;
             // 
             // MotionControlForm
             // 
-            AutoScaleDimensions = new SizeF(9F, 23F);
+            AutoScaleDimensions = new SizeF(8F, 19F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.WhiteSmoke;
             ClientSize = new Size(1196, 760);
@@ -290,10 +296,11 @@
             Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
             Name = "MotionControlForm";
             Text = "Motion Control - Smart Automation Control System\n";
+            Load += MotionControlForm_Load;
             gbCommandSetup.ResumeLayout(false);
             gbCommandSetup.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)nudDistance).EndInit();
             ((System.ComponentModel.ISupportInitialize)nudSpeed).EndInit();
+            ((System.ComponentModel.ISupportInitialize)nudDistance).EndInit();
             gbStatus.ResumeLayout(false);
             gbStatus.PerformLayout();
             gbRecentCommands.ResumeLayout(false);
@@ -314,7 +321,6 @@
         private NumericUpDown nudSpeed;
         private Button btnExecute;
         private GroupBox gbStatus;
-        private Label lblStatus;
         private Label lblStatusHeader;
         private GroupBox gbRecentCommands;
         private ListBox lbRecentCommands;
@@ -322,5 +328,6 @@
         private ComboBox cbDevice;
         private Button btnEmergencyStop;
         private Button btnQuickHome;
+        private TextBox txtStatus;
     }
 }
